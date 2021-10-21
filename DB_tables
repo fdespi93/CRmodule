@@ -1,0 +1,78 @@
+USE [DB]
+GO
+
+/****** Object:  Table [dbo].[CodeReferenceDetail]    Script Date: 10/21/2021 16:19:27 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CodeReferenceDetail](
+	[ParentCode] [nvarchar](50) NOT NULL,
+	[Code] [nvarchar](50) NOT NULL,
+	[Abbrev] [nvarchar](20) NULL,
+	[Descr] [nvarchar](250) NULL,
+	[created_by] [nvarchar](50) NULL,
+	[created_date] [datetime] NULL,
+	[modified_by] [nvarchar](50) NULL,
+	[modified_date] [datetime] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_CodeReferenceDetail] PRIMARY KEY CLUSTERED 
+(
+	[ParentCode] ASC,
+	[Code] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[CodeReferenceDetail] ADD  CONSTRAINT [DF_CodeReferenceDetail_created_date]  DEFAULT (getdate()) FOR [created_date]
+GO
+
+ALTER TABLE [dbo].[CodeReferenceDetail] ADD  CONSTRAINT [DF_CodeReferenceDetail_modified_date]  DEFAULT (getdate()) FOR [modified_date]
+GO
+
+ALTER TABLE [dbo].[CodeReferenceDetail] ADD  CONSTRAINT [DF_CodeReferenceDetail_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+
+
+
+USE [DB]
+GO
+
+/****** Object:  Table [dbo].[CodeReferenceMaster]    Script Date: 10/21/2021 16:20:36 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CodeReferenceMaster](
+	[SeriesNo] [int] IDENTITY(1,1) NOT NULL,
+	[Code] [nvarchar](50) NOT NULL,
+	[Descr] [nvarchar](max) NULL,
+	[created_by] [nvarchar](50) NULL,
+	[created_date] [datetime] NULL,
+	[modified_by] [nvarchar](50) NULL,
+	[modified_date] [datetime] NULL,
+	[IsDeleted] [bit] NULL,
+ CONSTRAINT [PK_CodeReferenceMaster_1] PRIMARY KEY CLUSTERED 
+(
+	[SeriesNo] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[CodeReferenceMaster] ADD  CONSTRAINT [DF_CodeReferenceMaster_created_date]  DEFAULT (getdate()) FOR [created_date]
+GO
+
+ALTER TABLE [dbo].[CodeReferenceMaster] ADD  CONSTRAINT [DF_CodeReferenceMaster_modified_date]  DEFAULT (getdate()) FOR [modified_date]
+GO
+
+ALTER TABLE [dbo].[CodeReferenceMaster] ADD  CONSTRAINT [DF_CodeReferenceMaster_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+
+
+
